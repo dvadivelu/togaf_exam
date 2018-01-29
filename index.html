@@ -1,0 +1,62 @@
+<!doctype html>
+<html ng-app="App">
+
+    <head>
+        <meta charset="utf-8">
+        <title>TOGAF Exams</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js"></script>
+        <script src="app.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <style>
+            .clearance {
+                color: black;
+                background: lightgreen;
+            }
+        </style>
+    </head>
+
+    <body ng-controller="ExamCtrl" class="container">
+        <div class="panel panel-default">
+            <div class="panel-body" >
+                <h1>   <img src="img/logo.png" class="img-rounded" alt="TOGAF" width="15%"> Practice Exams</h1>
+
+                <div ng-show="env"> 
+
+                    <img src='http://www.free-website-hit-counter.com/c.php?d=6&id=109625&s=100' border='0' > 
+
+                    <small>Visits</small>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default" ng-click="loadExam('exam1.js',1)">Exam 1</button>
+                    <button type="button" class="btn btn-default" ng-click="loadExam('exam2.js',2)">Exam 2</button>
+                    <button type="button" class="btn btn-default" ng-click="loadExam('exam3.js',3)">Exam 3</button>
+                    <button type="button" class="btn btn-default" ng-click="loadExam('exam4.js',4)">Exam 4</button>
+                    <button type="button" class="btn btn-default" ng-click="loadExam('exam5.js',5)">Exam 5</button>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="alert alert-danger">
+            <p> <strong>Selected Exam :  Practice Exam {{activeExam}}</strong></p>
+            <p ng-show="examSubmitted"> You scored {{finalScore}} and {{result}} the exam. </p>
+            <p> Unless otherwise stated, all questions have only <strong>ONE correct answer.</strong> This is a timed exam. Once you start you will not be able to be pause. The TOGAF Foundation exam contains 40 questions and you are given 60 minutes.   </p>
+        </div>
+        <div ng-repeat="todo in todos  ">
+            <div class="alert alert-info">{{$index + 1}}. {{todo.Name}} </div>
+            <div class="">
+                <div ng-repeat="option in todo.Options ">
+                    <p ng-class="{clearance:option.IsAnswer && examSubmitted}">
+                        <input type="checkbox" id="{{option.Id}}" ng-model="option.Selected" ng-change="onSelect(todo.Id, option.IsAnswer);"> </label> {{option.Name}}</p>
+        </div>
+        </div>
+    </div>
+<button type="button" class="btn btn-primary" ng-click="submitExam()">Submit Exam</button>
+<button type="button" class="btn btn-primary" ng-click="resetExam()">Reset Exam</button>
+</body>
+</div>
+</body>
+
+</html>
